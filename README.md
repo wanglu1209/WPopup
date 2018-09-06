@@ -1,6 +1,6 @@
 # WPopup - 一个简单使用并且高度定制的Popupwindow
 
-![](https://github.com/wanglu1209/WPopup/blob/master/img/gif.gif)
+<img src="https://github.com/wanglu1209/WPopup/blob/master/img/gif.gif?raw=true" style="zoom:70%" />
 
 - 自动设置show的位置
 - 自动设置倒三角的位置
