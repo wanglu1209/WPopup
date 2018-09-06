@@ -84,7 +84,7 @@ pop.showAtDirection(WPopupDirection.BOTTOM)
 
 
 方法名|参数类型|默认值|备注
-:---:|:--:|:---:|:-:
+:---|:--|:---|:-
 setData|List<WPopupModel>|null|设置数据 参数为一个字符串，一个图片的resId
 setCancelable|Boolean|false|设置点击外面是否能dismiss
 setOnItemClickListener|OnItemClickListener|null|设置item点击事件
