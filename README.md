@@ -1,6 +1,6 @@
 # WPopup - 一个简单使用并且高度定制的Popupwindow
 
-<img src="https://github.com/wanglu1209/WPopup/blob/master/img/gif.gif?raw=true" style="zoom:40%" />
+<img src="https://raw.githubusercontent.com/wanglu1209/WPopup/master/img/gif.gif" width="200" hegiht="400" align=center />
 
 <br/>
 <br/>
