@@ -348,7 +348,6 @@ open class BasePopup(val popParams: WPopParams) : View.OnTouchListener {
                 result[1] = 0
             }
         }
-        Log.d("112233", "${popupContentViewSize[0]} --- ${popupContentViewSize[1]}")
         mPopup.animationStyle = WPopupAnim.ANIM_SCALE_Y
         mPopup.showAtLocation(getContentView().rootView, Gravity.NO_GRAVITY, result[0], result[1])
     }
