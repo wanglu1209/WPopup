@@ -128,4 +128,9 @@ object Utils {
                 dipValue.toFloat(), context.resources.displayMetrics).toInt()
     }
 
+    fun sp2px(context: Context, spValue: Int): Int {
+        val fontScale = context.resources.displayMetrics.scaledDensity
+        return (spValue * fontScale + 0.5f).toInt()
+    }
+
 }

@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
 import com.wanglu.lib.*
+import com.wanglu.wpopup.R.id.*
 import kotlinx.android.synthetic.main.activity_main.*
 
 

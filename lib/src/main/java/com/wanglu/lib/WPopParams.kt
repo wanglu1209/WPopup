@@ -23,6 +23,7 @@ data class WPopParams(
     var commonPopupDividerMargin = 10   // 分割线的margin
     var commonPopupBgColor = Color.parseColor("#A5000000")
     var commonItemTextColor = Color.parseColor("#ffffff")
+    var commonItemTextSize = 14
     var commonPopMargin = 1
     var commonIconDirection = WPopupDirection.LEFT   // 传入的图片的位置
     var longClickView: View? = null   //长按点击事件的View

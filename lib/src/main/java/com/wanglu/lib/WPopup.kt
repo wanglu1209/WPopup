@@ -243,10 +243,18 @@ class WPopup(popParams: WPopParams) : BasePopup(popParams){
         }
 
         /**
-         * 设置item宽度
+         * 设置item字体颜色
          */
         fun setTextColor(color: Int): Builder{
             popParams.commonItemTextColor = color
+            return this
+        }
+
+        /**
+         * 设置item字体大小
+         */
+        fun setTextSize(size: Int): Builder{
+            popParams.commonItemTextSize = size
             return this
         }
 

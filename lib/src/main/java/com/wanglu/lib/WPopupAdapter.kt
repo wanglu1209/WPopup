@@ -13,6 +13,7 @@ class WPopupAdapter(private val popup: WPopup) : RecyclerView.Adapter<WPopupAdap
     private var mWItemClickListener: WPopup.Builder.OnItemClickListener? = null
     private var direction: Int? = null
     private var textColor = Color.parseColor("#ffffff")
+    private var textSize = 14
 
     fun setData(data: List<WPopupModel>) {
         mData = data
@@ -27,6 +28,11 @@ class WPopupAdapter(private val popup: WPopup) : RecyclerView.Adapter<WPopupAdap
 
     fun setTextColor(color: Int){
         textColor = color
+        notifyDataSetChanged()
+    }
+
+    fun setTextSize(size: Int){
+        this.textSize = size
         notifyDataSetChanged()
     }
 
@@ -46,6 +52,7 @@ class WPopupAdapter(private val popup: WPopup) : RecyclerView.Adapter<WPopupAdap
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.tv.text = mData!![position].text
         holder.tv.setTextColor(textColor)
+        holder.tv.textSize = Utils.sp2px(holder.tv.context, textSize).toFloat()
 
         holder.view.setOnClickListener {
             if (mWItemClickListener != null) {
