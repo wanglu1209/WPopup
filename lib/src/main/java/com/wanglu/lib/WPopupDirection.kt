@@ -1,6 +1,6 @@
 package com.wanglu.lib
 
-object Direction{
+object WPopupDirection{
 
     const val LEFT = -0x001
     const val RIGHT = -0x002

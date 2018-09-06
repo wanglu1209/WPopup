@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <!-- 正三角 -->
+    <!-- 倒三角 -->
     <item>
         <rotate
             android:fromDegrees="45"
-            android:pivotX="-135%"
+            android:pivotX="135%"
             android:pivotY="15%">
             <shape android:shape="rectangle">
                 <size
                     android:width="16dp"
                     android:height="16dp" />
-                <solid android:color="#77000000" />
+                <solid android:color="#CC000000" />
             </shape>
         </rotate>
     </item>

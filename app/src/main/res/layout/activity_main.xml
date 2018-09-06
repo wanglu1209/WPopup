@@ -7,20 +7,132 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <RelativeLayout
+        android:id="@+id/titleLayout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/colorPrimary">
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="点我"
+            android:textColor="#fff"
+            android:textSize="18sp"/>
+
+        <ImageView
+            android:id="@+id/ivMore"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:paddingLeft="15dp"
+            android:paddingRight="10dp"
+            android:src="@mipmap/more"/>
+    </RelativeLayout>
+
     <TextView
         android:id="@+id/tv"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
+        android:layout_below="@+id/titleLayout"
+        android:background="#757575"
         android:gravity="center"
-        android:background="#432513"
-        android:text="Hello World!"
-        android:textColor="#fff"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        android:layout_centerInParent="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        android:text="自适应 外部不能取消"
+        android:textColor="#fff"/>
+
+    <TextView
+        android:id="@+id/tv2"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/titleLayout"
+        android:background="#757575"
+        android:gravity="center"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="自适应  外部不能取消"
+        android:textColor="#fff"/>
+
+    <TextView
+        android:id="@+id/tv3"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:background="#757575"
+        android:gravity="center"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="10dp"
+        android:text="自适应 变暗 变颜色"
+        android:textColor="#fff"/>
+
+    <TextView
+        android:id="@+id/tv4"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:background="#757575"
+        android:gravity="center"
+        android:paddingLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:paddingRight="10dp"
+        android:text="自适应 变暗 变颜色"
+        android:textColor="#fff"/>
+
+    <TextView
+        android:id="@+id/tv5"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_below="@+id/tv2"
+        android:layout_marginTop="50dp"
+        android:background="#757575"
+        android:gravity="center"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="朋友圈 向左弹出 带图片"
+        android:layout_alignParentRight="true"
+        android:textColor="#fff"/>
+
+    <TextView
+        android:id="@+id/longClickView"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:textSize="18sp"
+        android:textColor="#fff"
+        android:text="长按 根据按住的位置自适应弹出"
+        android:background="#757575"
+        android:layout_marginBottom="180dp"
+        android:layout_marginTop="50dp"/>
+
+
+    <TextView
+        android:id="@+id/tv6"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_below="@+id/tv2"
+        android:layout_marginTop="50dp"
+        android:background="#757575"
+        android:gravity="center"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="自定义view"
+        android:textColor="#fff"/>
+
 
 </RelativeLayout>
