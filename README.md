@@ -88,7 +88,7 @@ pop.showAtDirection(WPopupDirection.BOTTOM)
 val longClickPop = WPopup.Builder(this)
       .setData(longData)
       .setPopupOrientation(WPopup.Builder.VERTICAL)
-      .setClickView(longClickView) // 一定要设置点击的view，用来注册事件
+      .setClickView(longClickView) // 点击的View，如果是RV/LV，则只需要传入RV/LV
       .setOnItemClickListener(object : WPopup.Builder.OnItemClickListener {
           override fun onItemClick(view: View, position: Int) {
               Toast.makeText(view.context, "$position", Toast.LENGTH_LONG).show()

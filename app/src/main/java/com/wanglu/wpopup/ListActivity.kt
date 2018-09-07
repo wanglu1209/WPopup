@@ -8,6 +8,7 @@ import android.widget.Toast
 import com.wanglu.lib.WPopup
 import com.wanglu.lib.WPopupDirection
 import com.wanglu.lib.WPopupModel
+import com.wanglu.wpopup.R.id.mRv
 import kotlinx.android.synthetic.main.activity_list.*
 
 class ListActivity: AppCompatActivity() {
