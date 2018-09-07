@@ -41,6 +41,8 @@ dependencies {
 
 ## 使用
 
+### 普通操作
+
 ```Kotlin
 // 创建WPopup
 val pop = WPopup.Builder(this)
@@ -67,7 +69,16 @@ pop.showAtView(view)
 pop.showAtDirectionByView(view, WPopupDirection.LEFT)
 ```
 
-#### 根据手指点击位置来显示
+#### 自己选择弹出位置  上下左右
+```Kotlin
+pop.showAtDirection(WPopupDirection.BOTTOM)
+```
+
+<br/>
+<br/>
+
+### 骚操作 根据手指点击位置来显示
+
 ```Kotlin
 val longClickPop = WPopup.Builder(this)
       .setData(longData)
@@ -79,23 +90,31 @@ val longClickPop = WPopup.Builder(this)
           }
       })
       .create()
-      
-      
+```
+
+#### 自动挑选位置 默认为右下方
+
+```Kotlin
 longClickPop.showAtFingerLocation()
 ```
 
-#### 设置从哪个方向弹出
+#### 手动挑选位置
+
 ```Kotlin
-pop.showAtDirection(WPopupDirection.BOTTOM)
+longClickPop.showAtFingerLocation(WPopupDirection.TOP)
 ```
 
+
+
 <br/><br/><br/>
+
+### 方法及参数
 
 **WPopup已经为您设置好了通用的UI，您只需要自己配置参数即可**
 
 
 方法名|参数类型|默认值|备注
-:---|:--|:---|:-
+:---|:--|:---|:--
 setData|List<WPopupModel>|null|设置数据 参数为一个字符串，一个图片的resId
 setCancelable|Boolean|false|设置点击外面是否能dismiss
 setOnItemClickListener|OnItemClickListener|null|设置item点击事件
@@ -128,10 +147,7 @@ val customPopup = BasePopup(
       )
 )
 
-show方法和上面一样
 ```
-
-
 
 
 
