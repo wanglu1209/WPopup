@@ -52,7 +52,7 @@ class WPopupAdapter(private val popup: WPopup) : RecyclerView.Adapter<WPopupAdap
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.tv.text = mData!![position].text
         holder.tv.setTextColor(textColor)
-        holder.tv.textSize = Utils.sp2px(holder.tv.context, textSize).toFloat()
+        holder.tv.textSize = textSize.toFloat()
 
         holder.view.setOnClickListener {
             if (mWItemClickListener != null) {
