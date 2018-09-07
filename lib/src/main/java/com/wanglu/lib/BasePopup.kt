@@ -289,8 +289,8 @@ open class BasePopup(val popParams: WPopParams) : View.OnTouchListener {
                 result[1] = viewLocation[1] + viewHeight + Utils.dp2px(getContext(), popParams.commonPopMargin)
             }
             WPopupDirection.TOP -> {
-                result[0] = viewLocation[0] + (viewWidth / 2) - popupContentViewSize[1] / 2
-                result[1] = viewLocation[1] - (viewWidth / 2) - Utils.dp2px(getContext(), popParams.commonPopMargin)
+                result[0] = viewLocation[0] + (viewWidth / 2) - popupContentViewSize[0] / 2
+                result[1] = viewLocation[1] - popupContentViewSize[1] - Utils.dp2px(getContext(), popParams.commonPopMargin)
             }
         }
 
