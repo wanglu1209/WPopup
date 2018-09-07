@@ -1,5 +1,6 @@
 package com.wanglu.wpopup
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -123,6 +124,10 @@ class MainActivity : AppCompatActivity() {
 
         tv5.setOnClickListener {
             friendCirclePop.showAtDirectionByView(tv5, WPopupDirection.LEFT)
+        }
+
+        toListActivity.setOnClickListener {
+            startActivity(Intent(this, ListActivity::class.java))
         }
 
     }

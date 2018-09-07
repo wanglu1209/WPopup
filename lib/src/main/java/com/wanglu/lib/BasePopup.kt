@@ -6,9 +6,11 @@ import android.content.ContentValues.TAG
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.*
 import android.view.View.OnTouchListener
+import android.widget.AbsListView
 import android.widget.PopupWindow
 
 
@@ -63,8 +65,45 @@ open class BasePopup(val popParams: WPopParams) : View.OnTouchListener {
             window.attributes = windowAttr
         }
 
+
+
         if (popParams.longClickView != null) {
-            popParams.longClickView!!.setOnTouchListener(this)
+            // 判断是否是ListView或者GridView
+            if (popParams.longClickView!! is AbsListView) {
+                // 拦截点击事件获取坐标
+                (popParams.longClickView!! as AbsListView).setOnTouchListener { v, event ->
+                    when (event.action) {
+                        MotionEvent.ACTION_DOWN -> {
+                            clickLocation[0] = event.rawX
+                            clickLocation[1] = event.rawY
+                        }
+                    }
+                    false
+                }
+            } else if (popParams.longClickView!! is RecyclerView) {
+                // 判断是不是RecyclerView 拦截点击事件获取坐标
+                (popParams.longClickView!! as RecyclerView).addOnItemTouchListener(object : RecyclerView.OnItemTouchListener {
+                    override fun onTouchEvent(p0: RecyclerView, p1: MotionEvent) {
+
+                    }
+
+                    override fun onInterceptTouchEvent(p0: RecyclerView, event: MotionEvent): Boolean {
+                        when (event.action) {
+                            MotionEvent.ACTION_DOWN -> {
+                                clickLocation[0] = event.rawX
+                                clickLocation[1] = event.rawY
+                            }
+                        }
+                        return false
+                    }
+
+                    override fun onRequestDisallowInterceptTouchEvent(p0: Boolean) {
+
+                    }
+
+                })
+            } else
+                popParams.longClickView!!.setOnTouchListener(this)
         }
 
         mPopup.animationStyle = popParams.animRes
@@ -300,7 +339,7 @@ open class BasePopup(val popParams: WPopParams) : View.OnTouchListener {
     /**
      * 根据手指长按位置来show
      */
-    fun showAtFingerLocation() {
+    open fun showAtFingerLocation() {
         popupContentViewSize = getPopupContentViewSize()
         val windowSize = Utils.getWindowSize(popParams.activity)
         val result = IntArray(2)
@@ -324,6 +363,58 @@ open class BasePopup(val popParams: WPopParams) : View.OnTouchListener {
             else -> {
                 // 如果上面能塞下
                 result[1] = (clickLocation[1] - popupContentViewSize[1]).toInt()
+            }
+        }
+
+        mPopup.showAtLocation(getContentView(), Gravity.NO_GRAVITY, result[0], result[1])
+    }
+
+    /**
+     * 根据手指长按位置和设定的方向来show
+     */
+    open fun showAtFingerLocation(direction: Int) {
+        popupContentViewSize = getPopupContentViewSize()
+        val result = IntArray(2)
+
+
+        when (direction) {
+            WPopupDirection.TOP -> {
+                // 正上方
+                result[0] = (clickLocation[0] - (popupContentViewSize[0] / 2)).toInt()
+                result[1] = (clickLocation[1] - popupContentViewSize[1]).toInt() - defaultMargin
+            }
+            WPopupDirection.LEFT -> {
+                // 正左方
+                result[0] = (clickLocation[0] - popupContentViewSize[0]).toInt() - defaultMargin
+                result[1] = (clickLocation[1] - popupContentViewSize[1] / 2).toInt()
+            }
+            WPopupDirection.BOTTOM -> {
+                // 正下方
+                result[0] = (clickLocation[0] - (popupContentViewSize[0] / 2)).toInt()
+                result[1] = clickLocation[1].toInt() + defaultMargin
+            }
+            WPopupDirection.RIGHT -> {
+                // 正右方
+                result[0] = clickLocation[0].toInt() + defaultMargin
+                result[1] = (clickLocation[1] - popupContentViewSize[1] / 2).toInt()
+            }
+            WPopupDirection.LEFT_TOP -> {
+                // 左上方
+                result[0] = (clickLocation[0] - popupContentViewSize[0]).toInt() - defaultMargin
+                result[1] = (clickLocation[1] - popupContentViewSize[1]).toInt() - defaultMargin
+            }
+            WPopupDirection.LEFT_BOTTOM -> {
+                // 左下方
+                result[0] = (clickLocation[0] - popupContentViewSize[0]).toInt() - defaultMargin
+                result[1] = clickLocation[1].toInt() + defaultMargin
+            }
+            WPopupDirection.RIGHT_TOP -> {
+                result[0] = clickLocation[0].toInt() + defaultMargin
+                result[1] = (clickLocation[1] - popupContentViewSize[1]).toInt() - defaultMargin
+            }
+            WPopupDirection.RIGHT_BOTTOM -> {
+                result[0] = clickLocation[0].toInt() + defaultMargin
+                result[1] = clickLocation[1].toInt() + defaultMargin
             }
         }
 
@@ -368,7 +459,7 @@ open class BasePopup(val popParams: WPopParams) : View.OnTouchListener {
         var popupContentViewHeight = getContentView().measuredHeight
         var popupContentViewWidth = getContentView().measuredWidth + defaultMargin
 
-        if(popParams.width == ViewGroup.LayoutParams.MATCH_PARENT){
+        if (popParams.width == ViewGroup.LayoutParams.MATCH_PARENT) {
             popupContentViewWidth = Utils.getWindowSize(popParams.activity)[0]
         }
 
@@ -414,6 +505,7 @@ open class BasePopup(val popParams: WPopParams) : View.OnTouchListener {
             MotionEvent.ACTION_DOWN -> {
                 clickLocation[0] = event.rawX
                 clickLocation[1] = event.rawY
+                Log.d("112233", "${clickLocation[0]} --- ${clickLocation[1]}")
             }
         }
         return false

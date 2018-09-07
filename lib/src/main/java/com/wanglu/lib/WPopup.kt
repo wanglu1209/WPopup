@@ -13,7 +13,7 @@ import com.wanglu.lib.rvDivider.HorizontalDividerItemDecoration
 import com.wanglu.lib.rvDivider.VerticalDividerItemDecoration
 
 
-class WPopup(popParams: WPopParams) : BasePopup(popParams){
+class WPopup(popParams: WPopParams) : BasePopup(popParams) {
 
     private var commonAdapter: WPopupAdapter = WPopupAdapter(this)
     private var recyclerView: RecyclerView
@@ -46,10 +46,18 @@ class WPopup(popParams: WPopParams) : BasePopup(popParams){
         super.showAtView(view)
     }
 
+    override fun showAtFingerLocation(direction: Int) {
+        if (direction == WPopupDirection.TOP || direction == WPopupDirection.RIGHT_TOP || direction == WPopupDirection.LEFT_TOP)
+            setTriangle(popParams.longClickView!!, WPopupDirection.TOP)
+        else if (direction == WPopupDirection.LEFT_BOTTOM || direction == WPopupDirection.BOTTOM || direction == WPopupDirection.RIGHT_BOTTOM)
+            setTriangle(popParams.longClickView!!, WPopupDirection.BOTTOM)
+        super.showAtFingerLocation(direction)
+    }
+
     override fun showAtDirectionByView(view: View, direction: Int) {
         if (direction == WPopupDirection.TOP || direction == WPopupDirection.BOTTOM)
             setTriangle(view, direction)
-        else{
+        else {
             if (triangle != null) {
                 commonRootLayout.removeView(triangle)
                 triangle = null
@@ -58,6 +66,7 @@ class WPopup(popParams: WPopParams) : BasePopup(popParams){
         }
         super.showAtDirectionByView(view, direction)
     }
+
 
     /**
      * 设置三角形
@@ -245,7 +254,7 @@ class WPopup(popParams: WPopParams) : BasePopup(popParams){
         /**
          * 设置item字体颜色
          */
-        fun setTextColor(color: Int): Builder{
+        fun setTextColor(color: Int): Builder {
             popParams.commonItemTextColor = color
             return this
         }
@@ -253,7 +262,7 @@ class WPopup(popParams: WPopParams) : BasePopup(popParams){
         /**
          * 设置item字体大小
          */
-        fun setTextSize(size: Int): Builder{
+        fun setTextSize(size: Int): Builder {
             popParams.commonItemTextSize = size
             return this
         }
@@ -269,7 +278,6 @@ class WPopup(popParams: WPopParams) : BasePopup(popParams){
             fun onItemClick(view: View, position: Int)
         }
     }
-
 
 
 }
