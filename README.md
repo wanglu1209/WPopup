@@ -1,5 +1,16 @@
 # WPopup - 一个简单使用并且高度定制的Popupwindow
 
+<p >
+	<a><img src="https://img.shields.io/github/release/wanglu1209/WPopup.svg"/></a>
+  	<a><img src="https://img.shields.io/github/last-commit/wanglu1209/WPopup.svg"/></a>
+	<a><img src="https://img.shields.io/github/issues/wanglu1209/WPopup.svg"/></a>
+	<a><img src="https://img.shields.io/github/issues-closed/wanglu1209/WPopup.svg"/></a>
+	<a><img src="https://img.shields.io/github/issues-pr/wanglu1209/WPopup.svg"/></a>
+	<a><img src="https://img.shields.io/github/issues-pr-closed/wanglu1209/WPopup.svg"/></a>
+	<a><img src="https://img.shields.io/github/forks/wanglu1209/WPopup.svg"/></a>
+	<a><img src="https://img.shields.io/github/stars/wanglu1209/WPopup.svg"/></a>
+</p>
+
 <img src="https://raw.githubusercontent.com/wanglu1209/WPopup/master/img/gif.gif" width="200" hegiht="400" align=center />
 
 <br/>
@@ -22,7 +33,7 @@ allprojects {
 }
 
 dependencies {
-        implementation 'com.github.wanglu1209:WPopup:0.11'
+        implementation 'com.github.wanglu1209:WPopup:lastReleases'
 }
 	
 ```
