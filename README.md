@@ -22,7 +22,7 @@ allprojects {
 }
 
 dependencies {
-        implementation 'com.github.wanglu1209:WPopup:0.1'
+        implementation 'com.github.wanglu1209:WPopup:0.11'
 }
 	
 ```
