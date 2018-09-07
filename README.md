@@ -13,6 +13,11 @@
 
 <img src="https://raw.githubusercontent.com/wanglu1209/WPopup/master/img/gif.gif" width="200" hegiht="400" align=center />
 
+
+<br/>
+
+<img src="https://raw.githubusercontent.com/wanglu1209/WPopup/master/img/undo.gif" width="200" hegiht="400" align=center />
+
 <br/>
 <br/>
 <br/>
