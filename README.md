@@ -11,12 +11,7 @@
 	<a><img src="https://img.shields.io/github/stars/wanglu1209/WPopup.svg"/></a>
 </p>
 
-<img src="https://raw.githubusercontent.com/wanglu1209/WPopup/master/img/gif.gif" width="200" hegiht="400" align=center />
-
-
-<br/>
-
-<img src="https://raw.githubusercontent.com/wanglu1209/WPopup/master/img/undo.gif" width="200" hegiht="400" align=center />
+<img src="https://raw.githubusercontent.com/wanglu1209/WPopup/master/img/gif.gif" width="200" hegiht="400" /><img src="https://raw.githubusercontent.com/wanglu1209/WPopup/master/img/undo.gif" width="200" hegiht="400" style="margin-left:150px"/>
 
 <br/>
 <br/>
