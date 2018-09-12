@@ -54,6 +54,7 @@ class MainActivity : AppCompatActivity() {
                 .setData(friendCircleData)
                 .setAnim(WPopupAnim.ANIM_FRIEND_CIRCLE)
                 .setIconDirection(WPopupDirection.LEFT)
+                .setDrawablePadding(20)
                 .setPopupOrientation(WPopup.Builder.HORIZONTAL)
                 .setOnItemClickListener(object : WPopup.Builder.OnItemClickListener {
                     override fun onItemClick(view: View, position: Int) {

@@ -14,25 +14,31 @@ class WPopupAdapter(private val popup: WPopup) : RecyclerView.Adapter<WPopupAdap
     private var direction: Int? = null
     private var textColor = Color.parseColor("#ffffff")
     private var textSize = 14
+    private var drawablePadding = 10
 
     fun setData(data: List<WPopupModel>) {
         mData = data
         notifyDataSetChanged()
     }
 
-    fun setDirection(d: Int){
+    fun setDirection(d: Int) {
         direction = d
         notifyDataSetChanged()
     }
 
 
-    fun setTextColor(color: Int){
+    fun setTextColor(color: Int) {
         textColor = color
         notifyDataSetChanged()
     }
 
-    fun setTextSize(size: Int){
+    fun setTextSize(size: Int) {
         this.textSize = size
+        notifyDataSetChanged()
+    }
+
+    fun setDrawablePadding(padding: Int) {
+        this.drawablePadding = padding
         notifyDataSetChanged()
     }
 
@@ -69,6 +75,7 @@ class WPopupAdapter(private val popup: WPopup) : RecyclerView.Adapter<WPopupAdap
                 WPopupDirection.LEFT -> holder.tv.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null)
                 WPopupDirection.RIGHT -> holder.tv.setCompoundDrawablesWithIntrinsicBounds(null, null, drawable, null)
             }
+            holder.tv.compoundDrawablePadding = Utils.dp2px(holder.tv.context, drawablePadding)
         }
     }
 

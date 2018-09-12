@@ -134,6 +134,7 @@ setPopupMargin|Int|1|设置弹出时和view的距离
 setClickView|View|null|设置长按事件的view
 setAnim|Int|WPopupAnim.ANIM_ALPHA|设置动画
 setIconDirection|Int|WPopupDirection.LEFT|设置icon的方向 如果data中设置了图片的话
+setDrawablePadding|Int|5|设置drawablePadding
 setTextColor|Int|Color.WHITE|设置item中text的颜色
 setTextSize|Int|14|设置item中text的大小
 

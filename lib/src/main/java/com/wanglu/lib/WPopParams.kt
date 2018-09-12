@@ -26,6 +26,7 @@ data class WPopParams(
     var commonItemTextSize = 14
     var commonPopMargin = 1
     var commonIconDirection = WPopupDirection.LEFT   // 传入的图片的位置
+    var commonDraablePadding = 5
     var longClickView: View? = null   //长按点击事件的View
     var animRes = WPopupAnim.ANIM_ALPHA    // 动画
 }
