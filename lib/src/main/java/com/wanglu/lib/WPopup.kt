@@ -6,6 +6,7 @@ import android.graphics.drawable.LayerDrawable
 import android.graphics.drawable.RotateDrawable
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -23,9 +24,14 @@ class WPopup(popParams: WPopParams) : BasePopup(popParams) {
 
     init {
         commonAdapter.setData(popParams.mCommonData!!)
-        commonAdapter.setItemClickListener(popParams.mWItemClickListener!!)
+        if (popParams.mWItemClickListener != null){
+            commonAdapter.setItemClickListener(popParams.mWItemClickListener!!)
+        }else{
+            Log.e("WPopup", "No item clickListener.")
+        }
         commonAdapter.setDirection(popParams.commonIconDirection)
         commonAdapter.setTextColor(popParams.commonItemTextColor)
+        commonAdapter.setTextSize(popParams.commonItemTextSize)
         recyclerView = getContentView().findViewById(R.id.mRvCommon)
         commonRootLayout = getContentView().findViewById(R.id.mCommonRootLayout)
         recyclerView.adapter = commonAdapter
