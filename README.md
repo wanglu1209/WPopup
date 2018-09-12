@@ -120,7 +120,7 @@ longClickPop.showAtFingerLocation(WPopupDirection.TOP)
 
 方法名|参数类型|默认值|备注
 :---|:--|:---|:--
-setData|List<WPopupModel>|null|设置数据 参数为一个字符串，一个图片的resId
+setData|List`<WPopupModel>`|null|设置数据 参数为一个字符串，一个图片的resId
 setCancelable|Boolean|false|设置点击外面是否能dismiss
 setOnItemClickListener|OnItemClickListener|null|设置item点击事件
 setPopupOrientation|String|WPopupWindow.Builder.VERTICAL|设置item的排列方向
