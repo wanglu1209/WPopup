@@ -137,6 +137,21 @@ switchText：非必填参数，点击之后切换的文字
 switchImgRes：非必填参数，点击之后切换的图片
 ```
 
+```Kotlin
+object WPopupDirection{
+    // 此为控制WPopup显示方向的类
+    const val LEFT = -0x001
+    const val RIGHT = -0x002
+    const val BOTTOM = -0x003
+    const val TOP = -0x004
+    // 下面这些只适用于showAtFingerLocation() 也就是根据手指手动挑选位置
+    const val LEFT_TOP = -0x005     // 左上
+    const val LEFT_BOTTOM = -0x006  // 左下
+    const val RIGHT_TOP = -0x007    // 右上
+    const val RIGHT_BOTTOM = -0x008 // 右下
+}
+```
+
 **WPopup已经为您设置好了通用的UI，您只需要自己配置参数即可**
 
 
