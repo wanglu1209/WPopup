@@ -50,6 +50,7 @@ class WPopup(popParams: WPopParams) : BasePopup(popParams) {
     override fun showAtView(view: View) {
         val showDirection = getShowDirection(view)
         setTriangle(view, showDirection)
+        commonAdapter.setShowView(view)
         super.showAtView(view)
     }
 
@@ -71,6 +72,24 @@ class WPopup(popParams: WPopParams) : BasePopup(popParams) {
             }
             oldDirection = direction
         }
+        commonAdapter.setShowView(view)
+        super.showAtDirectionByView(view, direction)
+    }
+
+    /**
+     * 在rv/lv中使用相同的按钮，必须传入position，不然item复用根本view的hashcode也会重复
+     */
+    fun showAtDirectionByListView(view: View, direction: Int, position: Int) {
+        if (direction == WPopupDirection.TOP || direction == WPopupDirection.BOTTOM)
+            setTriangle(view, direction)
+        else {
+            if (triangle != null) {
+                commonRootLayout.removeView(triangle)
+                triangle = null
+            }
+            oldDirection = direction
+        }
+        commonAdapter.setShowView(position)
         super.showAtDirectionByView(view, direction)
     }
 

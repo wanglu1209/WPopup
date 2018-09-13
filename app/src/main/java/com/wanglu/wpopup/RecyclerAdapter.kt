@@ -6,5 +6,6 @@ import com.chad.library.adapter.base.BaseViewHolder
 class RecyclerAdapter(layoutResId: Int) : BaseQuickAdapter<String, BaseViewHolder>(layoutResId) {
     override fun convert(helper: BaseViewHolder?, item: String?) {
         helper!!.addOnLongClickListener(R.id.mTvItem)
+        helper.addOnClickListener(R.id.btn)
     }
 }

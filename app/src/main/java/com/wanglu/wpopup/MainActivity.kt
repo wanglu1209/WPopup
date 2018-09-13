@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
                 })
                 .create()
 
-        val friendCircleData = mutableListOf(WPopupModel("点赞", R.mipmap.icon_support), WPopupModel("评论", R.mipmap.icon_comment))
+        val friendCircleData = mutableListOf(WPopupModel("点赞", R.mipmap.icon_support, "取消", R.mipmap.icon_comment), WPopupModel("评论", R.mipmap.icon_comment))
         val friendCirclePop = WPopup.Builder(this)
                 .setData(friendCircleData)
                 .setAnim(WPopupAnim.ANIM_FRIEND_CIRCLE)

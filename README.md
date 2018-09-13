@@ -13,9 +13,12 @@
 
 <div>
 <img src="https://raw.githubusercontent.com/wanglu1209/WPopup/master/img/gif.gif" width="200" height="350" />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 <img src="https://raw.githubusercontent.com/wanglu1209/WPopup/master/img/undo.gif" width="200" height="350" />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<img src="https://raw.githubusercontent.com/wanglu1209/WPopup/master/img/firend_circle.gif" width="200" height="350" />
+
 </div>
 
 <br/>
@@ -38,7 +41,7 @@ allprojects {
 }
 
 dependencies {
-        implementation 'com.github.wanglu1209:WPopup:lastReleases'
+        implementation 'com.github.wanglu1209:WPopup:lastRelease'
 }
 	
 ```
@@ -73,6 +76,15 @@ pop.showAtView(view)
 ```Kotlin      
 pop.showAtDirectionByView(view, WPopupDirection.LEFT)
 ```
+
+**注意：如果使用类似朋友圈的效果，使用同一个WPopup在一个ListView中展现，则需要调用：**
+
+```Kotlin
+pop.showAtDirectionByListView(view, WPopupDirection.LEFT, position)
+
+其中，position为本次点击的position
+```
+
 
 #### 自己选择弹出位置  上下左右
 ```Kotlin
@@ -114,6 +126,15 @@ longClickPop.showAtFingerLocation(WPopupDirection.TOP)
 <br/><br/><br/>
 
 ### 方法及参数
+
+```Kotlin
+data class WPopupModel(var text: String, var imgRes: Int = -1, var switchText: String = "", var switchImgRes: Int = -1)
+
+text：必填参数，显示的文字
+imgRes：非必填参数，显示的图片
+switchText：非必填参数，点击之后切换的文字
+switchImgRes：非必填参数，点击之后切换的图片
+```
 
 **WPopup已经为您设置好了通用的UI，您只需要自己配置参数即可**
 
