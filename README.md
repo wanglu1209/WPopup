@@ -17,7 +17,7 @@
 
 <img src="https://raw.githubusercontent.com/wanglu1209/WPopup/master/img/undo.gif" width="200" height="350" />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<img src="https://raw.githubusercontent.com/wanglu1209/WPopup/master/img/firend_circle.gif" width="200" height="350" />
+<img src="https://raw.githubusercontent.com/wanglu1209/WPopup/master/img/friend_circle.gif" width="200" height="350" />
 
 </div>
 
