@@ -9,7 +9,6 @@ import com.wanglu.lib.WPopup
 import com.wanglu.lib.WPopupAnim
 import com.wanglu.lib.WPopupDirection
 import com.wanglu.lib.WPopupModel
-import com.wanglu.wpopup.R.id.mRv
 import kotlinx.android.synthetic.main.activity_list.*
 
 class ListActivity: AppCompatActivity() {
@@ -53,6 +52,7 @@ class ListActivity: AppCompatActivity() {
                 .setData(friendCircleData)
                 .setAnim(WPopupAnim.ANIM_FRIEND_CIRCLE)
                 .setIconDirection(WPopupDirection.LEFT)
+                .setEnableChangeAnim(true)
                 .setPopupOrientation(WPopup.Builder.HORIZONTAL)
                 .setOnItemClickListener(object : WPopup.Builder.OnItemClickListener {
                     override fun onItemClick(view: View, position: Int) {

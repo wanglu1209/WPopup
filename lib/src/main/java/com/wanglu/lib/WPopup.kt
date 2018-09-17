@@ -32,7 +32,8 @@ class WPopup(popParams: WPopParams) : BasePopup(popParams) {
         commonAdapter.setDirection(popParams.commonIconDirection)
         commonAdapter.setTextColor(popParams.commonItemTextColor)
         commonAdapter.setTextSize(popParams.commonItemTextSize)
-        commonAdapter.setDrawablePadding(popParams.commonDraablePadding)
+        commonAdapter.setDrawablePadding(popParams.commonDrawablePadding)
+        commonAdapter.setIsEnableChangeAnim(popParams.commonIsEnableChangeAnim)
         recyclerView = getContentView().findViewById(R.id.mRvCommon)
         commonRootLayout = getContentView().findViewById(R.id.mCommonRootLayout)
         recyclerView.adapter = commonAdapter
@@ -294,7 +295,12 @@ class WPopup(popParams: WPopParams) : BasePopup(popParams) {
         }
 
         fun setDrawablePadding(padding: Int): Builder{
-            popParams.commonDraablePadding = padding
+            popParams.commonDrawablePadding = padding
+            return this
+        }
+
+        fun setEnableChangeAnim(isEnable: Boolean): Builder{
+            popParams.commonIsEnableChangeAnim = isEnable
             return this
         }
 

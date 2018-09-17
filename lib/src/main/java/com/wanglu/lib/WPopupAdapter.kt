@@ -21,6 +21,7 @@ class WPopupAdapter(private val popup: WPopup) : RecyclerView.Adapter<WPopupAdap
     private var drawablePadding = 10
     private var key = 0
     private val views = hashMapOf<Int, Int>()
+    private var isAnim: Boolean = false
 
     fun setData(data: List<WPopupModel>) {
         mData = data
@@ -67,6 +68,10 @@ class WPopupAdapter(private val popup: WPopup) : RecyclerView.Adapter<WPopupAdap
         notifyDataSetChanged()
     }
 
+    fun setIsEnableChangeAnim(isEnable: Boolean) {
+        isAnim = isEnable
+    }
+
     fun setItemClickListener(wItemClickListener: WPopup.Builder.OnItemClickListener) {
         this.mWItemClickListener = wItemClickListener
     }
@@ -104,6 +109,8 @@ class WPopupAdapter(private val popup: WPopup) : RecyclerView.Adapter<WPopupAdap
                         text = mData!![position].text
                         views[key] = 0
                     }
+                    if (isAnim)
+                        WCommonAnim(holder.tv).start()
                     holder.tv.text = text
                     showImg(holder, drawable)
                 }
@@ -116,18 +123,17 @@ class WPopupAdapter(private val popup: WPopup) : RecyclerView.Adapter<WPopupAdap
                         popup.dismiss()
                     }
                 }
-                handler.sendEmptyMessageDelayed(1, 100)
+                handler.sendEmptyMessageDelayed(1, 220)
                 mWItemClickListener!!.onItemClick(holder.view, position)
             }
         }
 
         // 如果可以切换的text不是空，那么则判断是否切换过
         if (mData!![position].switchText.isNotEmpty()) {
-            val text: String
-            if (views[key] == 0) {
-                text = mData!![position].text
+            val text: String = if (views[key] == 0) {
+                mData!![position].text
             } else {
-                text = mData!![position].switchText
+                mData!![position].switchText
             }
             holder.tv.text = text
         } else {
@@ -148,6 +154,7 @@ class WPopupAdapter(private val popup: WPopup) : RecyclerView.Adapter<WPopupAdap
             showImg(holder, drawable)
             holder.tv.compoundDrawablePadding = Utils.dp2px(holder.tv.context, drawablePadding)
         }
+
     }
 
     private fun showImg(holder: ViewHolder, drawable: Drawable) {
@@ -158,6 +165,7 @@ class WPopupAdapter(private val popup: WPopup) : RecyclerView.Adapter<WPopupAdap
             WPopupDirection.LEFT -> holder.tv.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null)
             WPopupDirection.RIGHT -> holder.tv.setCompoundDrawablesWithIntrinsicBounds(null, null, drawable, null)
         }
+
     }
 
 
