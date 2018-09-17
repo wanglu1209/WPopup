@@ -174,6 +174,7 @@ setIconDirection|Int|WPopupDirection.LEFT|设置icon的方向 如果data中设�
 setDrawablePadding|Int|5|设置drawablePadding
 setTextColor|Int|Color.WHITE|设置item中text的颜色
 setTextSize|Int|14|设置item中text的大小
+setEnableChangeAnim|Boolean|false|设置点击切换文字时是否启用动画
 
 
 **当然，如果默认的UI不适合您，您也可以自定义UI，只需传入一些参数即可**
