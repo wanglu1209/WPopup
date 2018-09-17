@@ -27,7 +27,7 @@ data class WPopParams(
     var commonPopMargin = 1
     var commonIconDirection = WPopupDirection.LEFT   // 传入的图片的位置
     var commonDrawablePadding = 5
-    var commonIsEnableChangeAnim = false    // 切换时是否启用动画
+    var commonIsEnableChangeAnim = true    // 切换时是否启用动画
     var longClickView: View? = null   //长按点击事件的View
     var animRes = WPopupAnim.ANIM_ALPHA    // 动画
 }
