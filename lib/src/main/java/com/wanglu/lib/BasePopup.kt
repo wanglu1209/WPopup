@@ -505,7 +505,6 @@ open class BasePopup(val popParams: WPopParams) : View.OnTouchListener {
             MotionEvent.ACTION_DOWN -> {
                 clickLocation[0] = event.rawX
                 clickLocation[1] = event.rawY
-                Log.d("112233", "${clickLocation[0]} --- ${clickLocation[1]}")
             }
         }
         return false
