@@ -1,7 +1,9 @@
 package com.wanglu.lib
 
+import android.animation.Animator
 import android.animation.ValueAnimator
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.graphics.Color
@@ -17,15 +19,11 @@ import android.widget.PopupWindow
 open class BasePopup(val popParams: WPopParams) : View.OnTouchListener {
 
     // 默认设置pop的宽高都为wrap_content
-    private val mPopup: PopupWindow
+    private val mPopup: PopupWindow = PopupWindow(popParams.width, popParams.height)
     // 默认背景半透明数值为0.4f
     private var dim = 0.4f
     // 背景是否半透明
     private var isBgDim = false
-    private var window: Window = popParams.activity.window
-    private var windowAttr: WindowManager.LayoutParams
-    private var bgDimAnimator: ValueAnimator
-    private var clearBgDimAnimator: ValueAnimator
     // 背景透明动画时间
     private var animDuration = 200L
 
@@ -36,74 +34,54 @@ open class BasePopup(val popParams: WPopParams) : View.OnTouchListener {
     var defaultMargin: Int
 
     init {
-        windowAttr = window.attributes
-        window.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
-        mPopup = PopupWindow(popParams.width, popParams.height)
         mPopup.isFocusable = true
 
-        mPopup.contentView = popParams.activity.layoutInflater.inflate(popParams.layoutRes, null)
+        mPopup.contentView = LayoutInflater.from(popParams.activity).inflate(popParams.layoutRes, null)
         dim = popParams.dimValue
         isBgDim = popParams.isDim
+
+
         mPopup.setOnDismissListener {
             dismiss()
         }
 
-        // 设置背景变暗的动画
-        bgDimAnimator = ValueAnimator.ofFloat(1f, dim)
-        bgDimAnimator.duration = animDuration
-        bgDimAnimator.addUpdateListener { animation ->
-            windowAttr.alpha = animation!!.animatedValue as Float
-            window.attributes = windowAttr
-        }
-
-
-        // 设置背景恢复的动画
-        clearBgDimAnimator = ValueAnimator.ofFloat(dim, 1f)
-        clearBgDimAnimator.duration = animDuration
-        clearBgDimAnimator.addUpdateListener { animation ->
-            windowAttr.alpha = animation!!.animatedValue as Float
-            window.attributes = windowAttr
-        }
-
-
 
         if (popParams.longClickView != null) {
             // 判断是否是ListView或者GridView
-            if (popParams.longClickView!! is AbsListView) {
-                // 拦截点击事件获取坐标
-                (popParams.longClickView!! as AbsListView).setOnTouchListener { v, event ->
-                    when (event.action) {
-                        MotionEvent.ACTION_DOWN -> {
-                            clickLocation[0] = event.rawX
-                            clickLocation[1] = event.rawY
-                        }
-                    }
-                    false
-                }
-            } else if (popParams.longClickView!! is RecyclerView) {
-                // 判断是不是RecyclerView 拦截点击事件获取坐标
-                (popParams.longClickView!! as RecyclerView).addOnItemTouchListener(object : RecyclerView.OnItemTouchListener {
-                    override fun onTouchEvent(p0: RecyclerView, p1: MotionEvent) {
-
-                    }
-
-                    override fun onInterceptTouchEvent(p0: RecyclerView, event: MotionEvent): Boolean {
+            when {
+                popParams.longClickView!!.get() is AbsListView -> // 拦截点击事件获取坐标
+                    (popParams.longClickView!!.get() as AbsListView).setOnTouchListener { v, event ->
                         when (event.action) {
                             MotionEvent.ACTION_DOWN -> {
                                 clickLocation[0] = event.rawX
                                 clickLocation[1] = event.rawY
                             }
                         }
-                        return false
+                        false
                     }
+                popParams.longClickView!!.get() is RecyclerView -> // 判断是不是RecyclerView 拦截点击事件获取坐标
+                    (popParams.longClickView!!.get() as RecyclerView).addOnItemTouchListener(object : RecyclerView.OnItemTouchListener {
+                        override fun onTouchEvent(p0: RecyclerView, p1: MotionEvent) {
 
-                    override fun onRequestDisallowInterceptTouchEvent(p0: Boolean) {
+                        }
 
-                    }
+                        override fun onInterceptTouchEvent(p0: RecyclerView, event: MotionEvent): Boolean {
+                            when (event.action) {
+                                MotionEvent.ACTION_DOWN -> {
+                                    clickLocation[0] = event.rawX
+                                    clickLocation[1] = event.rawY
+                                }
+                            }
+                            return false
+                        }
 
-                })
-            } else
-                popParams.longClickView!!.setOnTouchListener(this)
+                        override fun onRequestDisallowInterceptTouchEvent(p0: Boolean) {
+
+                        }
+
+                    })
+                else -> popParams.longClickView!!.get()!!.setOnTouchListener(this)
+            }
         }
 
         mPopup.animationStyle = popParams.animRes
@@ -199,12 +177,9 @@ open class BasePopup(val popParams: WPopParams) : View.OnTouchListener {
         return mPopup.contentView
     }
 
-    fun getWindow(): Window {
-        return window
-    }
 
     fun getContext(): Context {
-        return window.context
+        return popParams.activity
     }
 
     /**
@@ -480,7 +455,44 @@ open class BasePopup(val popParams: WPopParams) : View.OnTouchListener {
      */
     private fun setBgDim() {
         if (isBgDim) {
-            bgDimAnimator.start()
+            if (getContentView().context != null && getContentView().context is Activity) {
+                var window = (getContentView().context as Activity).window
+                var windowAttr = window.attributes
+                window.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
+
+
+                // 设置背景变暗的动画
+                val bgDimAnimator = ValueAnimator.ofFloat(1f, dim)
+                bgDimAnimator!!.duration = animDuration
+                bgDimAnimator.addUpdateListener { animation ->
+                    windowAttr.alpha = animation!!.animatedValue as Float
+                    window.attributes = windowAttr
+                }
+
+
+
+                bgDimAnimator.addListener(object : Animator.AnimatorListener{
+                    override fun onAnimationRepeat(animation: Animator?) {
+                    }
+
+                    override fun onAnimationEnd(animation: Animator?) {
+                        window = null
+                        windowAttr = null
+                    }
+
+                    override fun onAnimationCancel(animation: Animator?) {
+                    }
+
+                    override fun onAnimationStart(animation: Animator?) {
+                    }
+
+                })
+
+
+                bgDimAnimator.start()
+
+
+            }
         }
     }
 
@@ -490,7 +502,40 @@ open class BasePopup(val popParams: WPopParams) : View.OnTouchListener {
      */
     private fun resetDim() {
         if (isBgDim) {
-            clearBgDimAnimator.start()
+
+            if (getContentView().context != null && getContentView().context is Activity) {
+                var window = (getContentView().context as Activity).window
+                var windowAttr = window.attributes
+                window.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
+
+                // 设置背景恢复的动画
+                val clearBgDimAnimator = ValueAnimator.ofFloat(dim, 1f)
+                clearBgDimAnimator!!.duration = animDuration
+                clearBgDimAnimator.addUpdateListener { animation ->
+                    windowAttr.alpha = animation!!.animatedValue as Float
+                    window.attributes = windowAttr
+                }
+
+                clearBgDimAnimator.addListener(object : Animator.AnimatorListener{
+                    override fun onAnimationRepeat(animation: Animator?) {
+                    }
+
+                    override fun onAnimationEnd(animation: Animator?) {
+                        window = null
+                        windowAttr = null
+                    }
+
+                    override fun onAnimationCancel(animation: Animator?) {
+                    }
+
+                    override fun onAnimationStart(animation: Animator?) {
+                    }
+
+                })
+
+                clearBgDimAnimator.start()
+            }
+
         }
     }
 

@@ -1,6 +1,6 @@
 package com.wanglu.lib
 
-import android.app.Activity
+import android.content.Context
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.LayerDrawable
 import android.graphics.drawable.RotateDrawable
@@ -12,6 +12,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import com.wanglu.lib.rvDivider.HorizontalDividerItemDecoration
 import com.wanglu.lib.rvDivider.VerticalDividerItemDecoration
+import java.lang.ref.WeakReference
 
 
 class WPopup(popParams: WPopParams) : BasePopup(popParams) {
@@ -57,9 +58,9 @@ class WPopup(popParams: WPopParams) : BasePopup(popParams) {
 
     override fun showAtFingerLocation(direction: Int) {
         if (direction == WPopupDirection.TOP || direction == WPopupDirection.RIGHT_TOP || direction == WPopupDirection.LEFT_TOP)
-            setTriangle(popParams.longClickView!!, WPopupDirection.TOP)
+            setTriangle(popParams.longClickView!!.get()!!, WPopupDirection.TOP)
         else if (direction == WPopupDirection.LEFT_BOTTOM || direction == WPopupDirection.BOTTOM || direction == WPopupDirection.RIGHT_BOTTOM)
-            setTriangle(popParams.longClickView!!, WPopupDirection.BOTTOM)
+            setTriangle(popParams.longClickView!!.get()!!, WPopupDirection.BOTTOM)
         super.showAtFingerLocation(direction)
     }
 
@@ -153,7 +154,7 @@ class WPopup(popParams: WPopParams) : BasePopup(popParams) {
     }
 
 
-    class Builder(activity: Activity) {
+    class Builder(activity: Context) {
 
         companion object {
             const val VERTICAL = "VERTICAL"
@@ -250,7 +251,7 @@ class WPopup(popParams: WPopParams) : BasePopup(popParams) {
          * 获取长按事件的view
          */
         fun setClickView(view: View): Builder {
-            popParams.longClickView = view
+            popParams.longClickView = WeakReference(view)
             return this
         }
 

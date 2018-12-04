@@ -75,7 +75,7 @@ object Utils {
     /**
      * 获取窗口的大小
      */
-    fun getWindowSize(activity: Activity): IntArray {
+    fun getWindowSize(activity: Context): IntArray {
         val result = IntArray(2)
         val screenSize = getScreenSize(activity)
         result[0] = screenSize[0]

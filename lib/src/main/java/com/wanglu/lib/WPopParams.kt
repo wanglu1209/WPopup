@@ -1,14 +1,15 @@
 package com.wanglu.lib
 
-import android.app.Activity
+import android.content.Context
 import android.graphics.Color
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import android.view.ViewGroup
+import java.lang.ref.WeakReference
 
 data class WPopParams(
         val layoutRes: Int, // 布局
-        val activity: Activity, // activity
+        val activity: Context, // activity
         var isDim: Boolean = false,  // 是否半透明
         var dimValue: Float = 0.4f, // 半透明属性
         var cancelable: Boolean = true, // 点击外部可以dismiss
@@ -28,6 +29,6 @@ data class WPopParams(
     var commonIconDirection = WPopupDirection.LEFT   // 传入的图片的位置
     var commonDrawablePadding = 5
     var commonIsEnableChangeAnim = true    // 切换时是否启用动画
-    var longClickView: View? = null   //长按点击事件的View
+    var longClickView: WeakReference<View>? = null   //长按点击事件的View
     var animRes = WPopupAnim.ANIM_ALPHA    // 动画
 }
